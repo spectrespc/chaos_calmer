@@ -1,4 +1,4 @@
 #!/bin/sh
 
-echo -e '\n\e[1;33mOpenIPC.org firmware v.0.2 alpha \e[1;32m;)\e[0m\n\n' | logger -t info
+echo -e '\n\e[1;33mOpenIPC.org firmware v20.08.1 alpha \e[1;32m;)\e[0m\n\n' | logger -t info
 
