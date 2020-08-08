@@ -229,35 +229,10 @@ case $build in
 
 #################
 
-  release)
-    # Rebuild kernel, rootfs, firmware
-    make V=99 -j$(($(nproc)+1)) target/install
-    ;;
-
-  update)
-    # Update feeds
-    ./scripts/feeds update glutinium openipc packages luci management routing telephony # zftlab
-    ./scripts/feeds install -p glutinium -a -d m -f
-    ./scripts/feeds install -p openipc -a -d m -f
-    ./scripts/feeds install -p luci -a -d m -f
-    ./scripts/feeds install -p packages -a -d m -f
-    ./scripts/feeds install -p routing -a -d m -f
-    ./scripts/feeds install -p management -a -d m -f
-    ./scripts/feeds install -p telephony -a -d m -f
-    #./scripts/feeds install -p zftlab -a -d m -f
-    #
-    sed -i 's/+luci-app-firewall//' feeds/luci/collections/luci/Makefile
-    ;;
-
-  upgrade)
-    # Upgrade feeds
-    git pull
-    ;;
-
-  project)
+  changes)
     # Show project changes
     HASH1="ceddf6298ad84c0ac103d25559e4e76a57f5bf76"
-    HASH2="6022105ccc"
+    HASH2="95a1b6efa1"
     echo -e "\n####################################################################################################\n"
     git diff --name-only ${HASH1} ${HASH2} | grep -v "^dl/" | grep -v "target/linux/ar71xx" | grep -v "^target/linux/hi35xx" | grep -v "^target/linux/ramips" | grep -v "^package/boot" | grep -v "^user_cmarxmeier"
     echo -e "\n####################################################################################################\n"
@@ -269,6 +244,30 @@ case $build in
     #echo -e "\n####################################################################################################\n"
     #git diff --name-only ${HASH1} ${HASH2} | grep -e "^target/linux/ramips"
     #echo -e "\n####################################################################################################\n"
+    ;;
+
+  release)
+    # Rebuild kernel, rootfs, firmware
+    make V=99 -j$(($(nproc)+1)) target/install
+    ;;
+
+  update)
+    # Update feeds
+    git pull
+    echo -e "\n####################################################################################################\n"
+    ./scripts/feeds update glutinium openipc packages luci management routing telephony # dbell zftlab
+    echo -e "\n####################################################################################################\n"
+    ./scripts/feeds install -p glutinium -a -d m -f
+    ./scripts/feeds install -p openipc -a -d m -f
+    ./scripts/feeds install -p luci -a -d m -f
+    ./scripts/feeds install -p packages -a -d m -f
+    ./scripts/feeds install -p routing -a -d m -f
+    ./scripts/feeds install -p management -a -d m -f
+    ./scripts/feeds install -p telephony -a -d m -f
+    #./scripts/feeds install -p dbell -a -d m -f
+    #./scripts/feeds install -p zftlab -a -d m -f
+    #
+    sed -i 's/+luci-app-firewall//' feeds/luci/collections/luci/Makefile
     ;;
 
   uboot)
