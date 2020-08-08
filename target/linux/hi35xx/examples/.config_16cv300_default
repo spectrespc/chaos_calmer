@@ -4226,7 +4226,7 @@ CONFIG_PACKAGE_wpad-mini=m
 #
 # CONFIG_PACKAGE_hisi-osdrv2-sensor is not set
 # CONFIG_PACKAGE_hisi-osdrv3-base is not set
-# CONFIG_PACKAGE_hisi-osdrv3-binary is not set
+CONFIG_PACKAGE_hisi-osdrv3-binary=y
 CONFIG_PACKAGE_hisi-osdrv3-kmod=y
 CONFIG_PACKAGE_hisi-osdrv3-lib=y
 # CONFIG_PACKAGE_hisi-osdrv3-sensor is not set
