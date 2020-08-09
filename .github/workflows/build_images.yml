@@ -1,0 +1,76 @@
+name: Build OpenIPC images
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - 'v*'
+
+jobs:
+  image_build:
+    name: CV300 image build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: check if git tag exists
+        run: |
+          echo "::set-env name=HEAD_TAG::$(git tag --points-at HEAD)"
+
+      - name: install build dependencies
+        run: |
+          DEBIAN_FRONTEND=noninteractive sudo apt-get update && sudo apt-get -y install \
+          build-essential gawk libncurses-dev intltool python \
+          git subversion time unzip zlib1g-dev libssl-dev wget curl cpio bc \
+          gettext gettext-base liblocale-gettext-perl
+
+      - name: free disk space
+        run: |
+          sudo swapoff -a
+          sudo rm -f /swapfile
+          sudo apt clean
+          docker rmi $(docker image ls -aq)
+          df -h
+
+      - name: build OpenIPC
+        run: |
+          ./Project_OpenIPC.sh hi3516cv300
+          sed -i 's/CONFIG_TARGET_hi35xx_16cv300=y/# CONFIG_TARGET_hi35xx_16cv300 is not set/g' .config
+          sed -i 's/# CONFIG_TARGET_hi35xx_16ev100 is not set/CONFIG_TARGET_hi35xx_16ev100=y/' .config
+          sed -i 's/CONFIG_PACKAGE_uboot-hi35xx-16cv300=y/CONFIG_PACKAGE_uboot-hi35xx-16ev100=y/' .config
+          make -j$(nproc) V=s package/boot/uboot-hi35xx/{clean,compile,install}
+
+      - name: Post free disk space
+        run: |
+          df -h
+
+      - name: Prerelease (for dev versions)
+        uses: "marvinpinto/action-automatic-releases@latest"
+        if: env.HEAD_TAG == ''
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Build"
+          files: |
+            bin/hi35xx/openwrt-hi35xx-16ev100-u-boot.bin
+            bin/hi35xx/openwrt-hi35xx-16cv300-u-boot.bin
+            bin/hi35xx/openwrt-hi35xx-16cv300-default-root.squashfs
+            bin/hi35xx/openwrt-hi35xx-16cv300-default-uImage
+
+      - name: Create release (for tagged versions)
+        uses: "marvinpinto/action-automatic-releases@latest"
+        if: env.HEAD_TAG != ''
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: ${{ env.HEAD_TAG }}
+          title: Release ${{ env.HEAD_TAG }}
+          prerelease: false
+          files: |
+            bin/hi35xx/openwrt-hi35xx-16ev100-u-boot.bin
+            bin/hi35xx/openwrt-hi35xx-16cv300-u-boot.bin
+            bin/hi35xx/openwrt-hi35xx-16cv300-default-root.squashfs
+            bin/hi35xx/openwrt-hi35xx-16cv300-default-uImage
