@@ -15,7 +15,7 @@ p. !https://opencollective.com/openipc/tiers/backer.svg?avatarHeight=36!:https:/
 
 h4. Usage example for Debian/Ubuntu (test branch from ZFT Lab.)
 
-pre. git clone --depth=1 --branch=feature/zigfisher_current_work https://github.com/OpenIPC/chaos_calmer.git OpenIPC
+pre. git clone --depth=1 --branch=develop https://github.com/OpenIPC/chaos_calmer.git OpenIPC
 cd OpenIPC
 ./Project_OpenIPC.sh update
 ./Project_OpenIPC.sh 18ev200_zftlab_rotek
