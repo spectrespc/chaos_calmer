@@ -1,4 +1,4 @@
-name: Build OpenIPC images from develop branch
+name: Build OpenIPC images from dev
 
 on:
   push:
