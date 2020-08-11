@@ -13,5 +13,6 @@ echo -e ${NOTE}"15.05.1.$VERSION_NUMBER"${DONE}
 
 sed -i "s/VERSION_NUMBER:=\$(if \$(VERSION_NUMBER),\$(VERSION_NUMBER),.*/VERSION_NUMBER:=\$(if \$(VERSION_NUMBER),\$(VERSION_NUMBER),15.05.1.$VERSION_NUMBER)/" include/version.mk
 
+git push
 git tag v15.05.1.$VERSION_NUMBER -m "v15.05.1.$VERSION_NUMBER"
 git push --follow-tags
