@@ -23,7 +23,7 @@ prepare_image_config() {
 }
 
 start_build() {
-    make clean && time make V=s -j$(($(nproc)+1))                                          # Clean and compile
+    make clean && time make -j$(($(nproc)+1))                                              # Clean and compile, use V=s for debug
     rm target/linux/hi35xx/base-files/etc/soc-version                                      # Remove temporary identification file for updates
     #DATE=$(date +%Y%m%d) ; [ -d zft_lab ] || mkdir -p zft_lab                             # Set time and create output dir
     #cp -v bin/hi35xx/uImage-OpenWrt-HI35xx zft_lab/uImage-OpenWrt-${SOC}-${DATE}.bin      # Copy Firmware
