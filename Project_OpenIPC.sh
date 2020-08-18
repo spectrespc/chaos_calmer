@@ -14,10 +14,11 @@ fi
 
 prepare_image_config() {
     echo -e "\nStart building OpenWrt firmware for $1 with kernel $2"                      #
-    echo "$1" > target/linux/hi35xx/base-files/etc/soc-version                             # Create identification file for updates
     cp target/linux/hi35xx/examples/.$3 ./.config                                          # Copy default config
     sed -i "s/KERNEL_PATCHVER:=.*/KERNEL_PATCHVER:=$2/" target/linux/hi35xx/Makefile       # Set right kernel version
     ./scripts/feeds update glutinium openipc                                               # Update glutinium and openipc feed
+    #unused options
+    #echo "$1" > target/linux/hi35xx/base-files/etc/soc-version                            # Create identification file for updates
     #sed -i 's/# CONFIG_ALL is not set.*/CONFIG_ALL=y/' ./.config                          # Enable all packages
     #make package/feeds/OpenIPC/histreamer/{compile,install}
 }
