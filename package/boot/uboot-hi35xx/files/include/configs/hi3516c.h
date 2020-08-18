@@ -74,6 +74,26 @@
 
 #endif /* CONFIG_SPI_FLASH_HISFC350 */
 
+/*-----------------------------------------------------------------------
+ * NAND Flash Configuration
+ -----------------------------------------------------------------------*/
+#define CONFIG_SYS_64BIT_VSPRINTF
+#define CONFIG_CMD_NAND
+#define CONFIG_SYS_NAND_BASE NAND_MEM_BASE
+#define CONFIG_NAND_3518			1
+#define CFG_MAX_NAND_DEVICE			CONFIG_SYS_MAX_NAND_DEVICE
+#define CONFIG_SYS_MAX_NAND_DEVICE		1
+#define CONFIG_SYS_NAND_MAX_CHIPS		2
+#define CONFIG_ENV_IS_IN_NAND			1
+
+#define CONFIG_HINFC301_MAX_CHIP		CONFIG_SYS_MAX_NAND_DEVICE
+#define CONFIG_HINFC301_REG_BASE_ADDRESS	NANDC_REG_BASE
+#define CONFIG_HINFC301_BUFFER_BASE_ADDRESS	NAND_MEM_BASE
+#define CONFIG_HINFC301_HARDWARE_PAGESIZE_ECC
+#define CONFIG_HINFC301_W_LATCH			(0xa)
+#define CONFIG_HINFC301_R_LATCH			(0xa)
+#define CONFIG_HINFC301_RW_LATCH		(0xa)
+
 /* no nor flash */
 #define CONFIG_SYS_NO_FLASH
 /* cp.b */
@@ -115,6 +135,7 @@
 #define CONFIG_ENV_IS_IN_SPI_FLASH	1
 
 #define CONFIG_ENV_OFFSET		0x40000 /* environment starts here */
+#define CONFIG_ENV_NAND_ADDR		(CONFIG_ENV_OFFSET)
 #define CONFIG_ENV_SPI_ADDR		(CONFIG_ENV_OFFSET)
 #define CONFIG_CMD_SAVEENV
 
@@ -139,6 +160,7 @@
 #define CONFIG_OSMEM		32M
 #define CONFIG_SENSOR		auto
 #define CONFIG_LINUX_CMD	version
+
 
 /*-----------------------------------------------------------------------
  * for bootm linux
@@ -201,7 +223,7 @@
 #define CFG_CMDLINE_HISTORYS		8
 #define CONFIG_CMDLINE_EDITING
 #define CFG_DDR_PHYS_OFFSET		MEM_BASE_DDR
-#define CFG_DDR_SIZE			(128 * 1024 * 1024UL)	/* 128M Bytes */
+#define CFG_DDR_SIZE			(256 * 1024 * 1024UL)	/* 256M Bytes */
 
 #define CONFIG_SYS_MEMTEST_START	(CFG_DDR_PHYS_OFFSET +\
 						sizeof(unsigned long))
@@ -226,7 +248,7 @@
 #define CONFIG_PL01x_PORTS		{(void *)UART0_REG_BASE}
 #define CONFIG_CONS_INDEX		0
 
-#define CONFIG_PRODUCTNAME              "hi3518c"
+#define CONFIG_PRODUCTNAME              "hi3516c"
 
 /*-----------------------------------------------------------------------
  * sdcard/usb storage system update
