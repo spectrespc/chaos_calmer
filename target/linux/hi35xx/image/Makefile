@@ -120,6 +120,12 @@ define NewDevice
 endef
 
 
+ifeq ($(SUBTARGET),16cv100)
+    $(eval $(call NewDevice,default,DEFAULT,DEFAULT,ALL,HI3516CV100,320k,DEFAULT)) # @flyrouter
+endif # ifeq ($(SUBTARGET),16cv100)
+
+
+
 ifeq ($(SUBTARGET),16cv200)
     $(eval $(call NewDevice,default,DEFAULT,DEFAULT,ALL,HI3516CV200,320k,DEFAULT)) # @flyrouter
     $(eval $(call NewDevice,jvt-s323h16vf,JVT-S323H16VF,JVT S323H16VF,IMX323,HI3516CV200,320k,JVT_S323H16VF)) # @flyrouter
