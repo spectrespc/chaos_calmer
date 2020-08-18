@@ -23,7 +23,8 @@ prepare_image_config() {
 }
 
 start_build() {
-    make clean && time make V=s -j$(($(nproc)+1))                                          # Clean and compile
+    make clean && time make -j$(($(nproc)+1))                                              # Clean and compile, use V=s for debug
+    #make clean && time make -j1 V=s                                                       # Clean and compilewith debug info
     rm target/linux/hi35xx/base-files/etc/soc-version                                      # Remove temporary identification file for updates
     #DATE=$(date +%Y%m%d) ; [ -d zft_lab ] || mkdir -p zft_lab                             # Set time and create output dir
     #cp -v bin/hi35xx/uImage-OpenWrt-HI35xx zft_lab/uImage-OpenWrt-${SOC}-${DATE}.bin      # Copy Firmware
@@ -32,50 +33,15 @@ start_build() {
 
 case $build in
 
-  hi3516cv100|hi3518av100|hi3518ev100)
-    SOC=${build}
-    prepare_image_config ${SOC} "3.0.8" "config_armv5tej_luci_default"
-    start_build
-    ;;
-
-  hi3518cv100)
-    SOC=${build}
-    prepare_image_config ${SOC} "3.0.8" "config_18cv100_default"
-    start_build
-    ;;
-
-  hi3516cv200)
-    SOC=${build}
-    prepare_image_config ${SOC} "3.4.35" "config_16cv200_jvt_s323h16vf"
-    start_build
-    ;;
-
-  hi3518ev200|hi3518ev201)
-    SOC=${build}
-    prepare_image_config ${SOC} "3.4.35" "config_18ev200_jvt_s130h18v"
-    start_build
-    ;;
-
-  hi3516cv300)
-    SOC=${build}
-    prepare_image_config ${SOC} "3.18.20" "config_16cv300_default"
-    start_build
-    ;;
-
-  hi3516ev100)
-    SOC=${build}
-    prepare_image_config ${SOC} "3.18.20" "config_16ev100_default"
-    start_build
-    ;;
-
-
-#################
+###
 
   16cv100_DEFAULT)
     SOC=${build}
     prepare_image_config ${SOC} "3.0.8" "config_16cv100_DEFAULT"
     start_build
     ;;
+
+###
 
   16cv200_DEFAULT)
     SOC=${build}
@@ -101,6 +67,37 @@ case $build in
     start_build
     ;;
 
+###
+
+  16cv300_DEFAULT)
+    SOC=${build}
+    prepare_image_config ${SOC} "3.18.20" "config_16cv300_DEFAULT"
+    start_build
+    ;;
+
+###
+
+  16ev100_DEFAULT)
+    SOC=${build}
+    prepare_image_config ${SOC} "3.18.20" "config_16ev100_DEFAULT"
+    start_build
+    ;;
+
+###
+
+  hi3518av100_DEFAULT)
+    SOC=${build}
+    prepare_image_config ${SOC} "3.0.8" "config_armv5tej_luci_default"
+    start_build
+    ;;
+
+###
+
+  18cv100_DEFAULT)
+    SOC=${build}
+    prepare_image_config ${SOC} "3.0.8" "config_18cv100_DEFAULT"
+    start_build
+    ;;
 
   18cv100_zftlab_vixand)
     SOC=${build}
@@ -108,6 +105,13 @@ case $build in
     start_build
     ;;
 
+###
+
+  18ev100_DEFAULT)
+    SOC=${build}
+    prepare_image_config ${SOC} "3.0.8" "config_18ev100_DEFAULT"
+    start_build
+    ;;
 
   18ev100_zftlab_vixand)
     SOC=${build}
@@ -115,6 +119,7 @@ case $build in
     start_build
     ;;
 
+###
 
   18ev200_DEFAULT)
     SOC=${build}
@@ -206,6 +211,7 @@ case $build in
     start_build
     ;;
 
+###
 
   18ev201_DEFAULT)
     SOC=${build}
@@ -213,12 +219,15 @@ case $build in
     start_build
     ;;
 
+###
 
   20dv100_DEFAULT)
     SOC=${build}
     prepare_image_config ${SOC} "3.0.8" "config_20dv100_zftlab_telemetry"
     start_build
     ;;
+
+###
 
   20dv200_DEFAULT)
     SOC=${build}
@@ -279,8 +288,7 @@ case $build in
     echo -e "\n#####################################"
     echo -e "\nMore information on the site - http://openipc.org\n"
     echo -e "\nPLEASE SELECT ONE OPTION IN COMMAND LINE"
-    echo -e "\nBest tested profiles:\n\n  16cv100_DEFAULT\n\n  16cv200_DEFAULT\n  16cv200_jvt_s323h16vf\n  16cv200_zftlab_acsys\n  16cv200_zftlab_megacam\n\n  18cv100_zftlab_vixand\n\n  18ev100_zftlab_vixand\n\n  18ev200_DEFAULT\n  18ev200_jvt_s130h18v\n  18ev200_jvt_s135h18vf\n  18ev200_switcam_hs303\n  18ev200_switcam_hs303_rotek\n  18ev200_xm_blk18ev_0035_0042\n  18ev200_zftlab_baresip\n  18ev200_zftlab_dbell\n  18ev200_zftlab_megacam\n  18ev200_zftlab_mini\n  18ev200_zftlab_okulus\n  18ev200_zftlab_rotek\n  18ev200_zftlab_tehshield\n  18ev200_zftlab_telemetry\n  18ev200_zftlab_vixand\n\n  18ev201_DEFAULT\n\n  20dv100_DEFAULT\n\n  20dv200_DEFAULT\n"
-    echo -e "\nUntested:\n  hi3516cv100\n  hi3518av100\n  hi3518cv100\n  hi3518ev100\n\n  hi3516cv300\n  hi3516ev100"
+    echo -e "\nBest tested profiles:\n\n  16cv100_DEFAULT\n\n  16cv200_DEFAULT\n  16cv200_jvt_s323h16vf\n  16cv200_zftlab_acsys\n  16cv200_zftlab_megacam\n\n  16cv300_DEFAULT\n\n  16ev100_DEFAULT\n\n  18av100_DEFAULT\n\n  18cv100_DEFAULT\n  18cv100_zftlab_vixand\n\n  18ev100_DEFAULT\n  18ev100_zftlab_vixand\n\n  18ev200_DEFAULT\n  18ev200_jvt_s130h18v\n  18ev200_jvt_s135h18vf\n  18ev200_switcam_hs303\n  18ev200_switcam_hs303_rotek\n  18ev200_xm_blk18ev_0035_0042\n  18ev200_zftlab_baresip\n  18ev200_zftlab_dbell\n  18ev200_zftlab_megacam\n  18ev200_zftlab_mini\n  18ev200_zftlab_okulus\n  18ev200_zftlab_rotek\n  18ev200_zftlab_tehshield\n  18ev200_zftlab_telemetry\n  18ev200_zftlab_vixand\n\n  18ev201_DEFAULT\n\n  20dv100_DEFAULT\n\n  20dv200_DEFAULT\n"
     echo -e "\n#####################################"
     (echo -e "\nCheck OPENWRT repo...\n" ; git status)
     echo -e "\n#####################################"
