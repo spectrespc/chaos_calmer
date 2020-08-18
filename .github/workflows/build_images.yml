@@ -1,9 +1,9 @@
-name: Build OpenIPC images from dev
+name: Build OpenIPC images
 
 on:
   push:
     branches:
-      - develop
+      - master
     tags:
       - 'v*'
 
