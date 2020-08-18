@@ -9,7 +9,7 @@ on:
 
 jobs:
   image_build:
-    name: CV300 image build
+    name: Hi3516Cv300 group image build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -38,7 +38,7 @@ jobs:
       - name: build OpenIPC
         run: |
           ./Project_OpenIPC.sh update
-          ./Project_OpenIPC.sh 16cv300_DEFAULT 
+          ./Project_OpenIPC.sh 16cv300_DEFAULT
           sed -i 's/CONFIG_TARGET_hi35xx_16cv300=y/# CONFIG_TARGET_hi35xx_16cv300 is not set/g' .config
           sed -i 's/# CONFIG_TARGET_hi35xx_16ev100 is not set/CONFIG_TARGET_hi35xx_16ev100=y/' .config
           sed -i 's/CONFIG_PACKAGE_uboot-hi35xx-16cv300=y/CONFIG_PACKAGE_uboot-hi35xx-16ev100=y/' .config
