@@ -1,9 +1,9 @@
---- a/board/hi3516cv300/board.c
-+++ b/board/hi3516cv300/board.c
-@@ -199,8 +199,19 @@ int save_bootdata_to_flash(void)
-        return 0;
+--- a/board/hi3518ev200/board.c		2020-08-23 21:16:00.769480300 +0300
++++ b/board/hi3518ev200/board.c		2020-08-23 21:15:53.269593157 +0300
+@@ -115,8 +115,19 @@
+	return 0;
  }
- 
+
 +void detect_memory(void) {
 +       ulong tested_ram = get_ram_size((long *)CFG_DDR_PHYS_OFFSET, CFG_DDR_SIZE)
 +               / 1024 / 1024;
@@ -18,5 +18,5 @@
  {
 +       detect_memory();
  #ifdef CONFIG_RANDOM_ETHADDR
-        random_init_r();
+	random_init_r();
  #endif

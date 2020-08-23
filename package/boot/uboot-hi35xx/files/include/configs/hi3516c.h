@@ -148,9 +148,9 @@
 /*-----------------------------------------------------------------------
  *  Environment   Configuration
  ------------------------------------------------------------------------*/
-#define CONFIG_BOOTCOMMAND	"setenv bootargs $(bootargs) mem=$(osmem) ethaddr=$(ethaddr) phyaddru=$(phyaddru) phyaddrd=$(phyaddrd) sensor=$(sensor) linux_cmd=$(linux_cmd); sf probe 0; sf read 0x82000000 0x50000 0x200000; bootm 0x82000000"
+#define CONFIG_BOOTCOMMAND	"setenv bootargs $(bootargs) totalmem=$(totalmem) mem=$(osmem) ethaddr=$(ethaddr) phyaddru=$(phyaddru) phyaddrd=$(phyaddrd) sensor=$(sensor) linux_cmd=$(linux_cmd); sf probe 0; sf read 0x82000000 0x50000 0x200000; bootm 0x82000000"
 #define CONFIG_BOOTDELAY	1
-#define CONFIG_BOOTARGS		"totalmem=64M console=ttyAMA0,115200 panic=20 root=/dev/mtdblock3 rootfstype=squashfs,jffs2 mtdparts=hi_sfc:256k(boot),64k(env),2048k(kernel),5120k(rootfs),-(rootfs_data)"
+#define CONFIG_BOOTARGS		"console=ttyAMA0,115200 panic=20 root=/dev/mtdblock3 rootfstype=squashfs,jffs2 mtdparts=hi_sfc:256k(boot),64k(env),2048k(kernel),5120k(rootfs),-(rootfs_data)"
 #define CONFIG_NETMASK		255.255.255.0		/* talk on MY local net */
 #define CONFIG_IPADDR		192.168.1.10		/* default static IP */
 #define CONFIG_SERVERIP		192.168.1.254		/* default tftp server ip */
@@ -160,7 +160,6 @@
 #define CONFIG_OSMEM		32M
 #define CONFIG_SENSOR		auto
 #define CONFIG_LINUX_CMD	version
-
 
 /*-----------------------------------------------------------------------
  * for bootm linux
@@ -199,12 +198,23 @@
 /* default is hieth-switch-fabric */
 #define CONFIG_NET_HISFV300
 #ifdef CONFIG_NET_HISFV300
+	#define CONFIG_NET_HISFV300_3518	1			/* Add 2020.0821 */
 	#define HISFV_MII_MODE			0
 	#define HISFV_RMII_MODE			1
 	#define HIETH_MII_RMII_MODE_U		HISFV_MII_MODE
 	#define HIETH_MII_RMII_MODE_D		HISFV_MII_MODE
-	#define HISFV_PHY_U			1
-	#define HISFV_PHY_D			2 /* fix me */
+	#define HISFV_PHY_U			1			/* Change 2020.08.21 set 1 or 0 */
+	#define HISFV_PHY_D			2			/* Change 2020.08.21 set 2 or 1 */
+	#undef HISFV_RESET_GPIO_EN
+	#ifdef HISFV_RESET_GPIO_EN
+		/* use gpio5_0 to control sfv reset */
+		#define HISFV_RESET_GPIO_BASE	GPIO0_REG_BASE
+		#define HISFV_RESET_GPIO_DIR	0x400
+		#define HISFV_RESET_GPIO_BIT	5
+		#define HISFV_RESET_GPIO_DIR_OUT 1
+		/* 0-reset; 1-undo reset */
+		#define HISFV_RESET_GPIO_DATA	0
+	#endif /* HISFV_RESET_GPIO_EN */
 #endif /* CONFIG_NET_HISFV300 */
 
 /*-----------------------------------------------------------------------
