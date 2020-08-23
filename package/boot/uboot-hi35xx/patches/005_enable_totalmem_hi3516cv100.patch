@@ -1,7 +1,7 @@
---- a/board/hi3516cv300/board.c
-+++ b/board/hi3516cv300/board.c
-@@ -199,8 +199,19 @@ int save_bootdata_to_flash(void)
-        return 0;
+--- a/board/hi3518/board.c		2018-04-26 06:57:52.000000000 +0300
++++ b/board/hi3518/board.c		2020-08-23 21:12:28.628672769 +0300
+@@ -101,8 +101,19 @@
+ 	return 0;
  }
  
 +void detect_memory(void) {
@@ -18,5 +18,5 @@
  {
 +       detect_memory();
  #ifdef CONFIG_RANDOM_ETHADDR
-        random_init_r();
+ 	random_init_r();
  #endif
