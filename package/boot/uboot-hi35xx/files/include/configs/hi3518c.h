@@ -74,6 +74,26 @@
 
 #endif /* CONFIG_SPI_FLASH_HISFC350 */
 
+/*-----------------------------------------------------------------------
+ * NAND Flash Configuration
+ -----------------------------------------------------------------------*/
+#define CONFIG_SYS_64BIT_VSPRINTF
+#define CONFIG_CMD_NAND
+#define CONFIG_SYS_NAND_BASE NAND_MEM_BASE
+#define CONFIG_NAND_3518			1
+#define CFG_MAX_NAND_DEVICE			CONFIG_SYS_MAX_NAND_DEVICE
+#define CONFIG_SYS_MAX_NAND_DEVICE		1
+#define CONFIG_SYS_NAND_MAX_CHIPS		2
+#define CONFIG_ENV_IS_IN_NAND			1
+
+#define CONFIG_HINFC301_MAX_CHIP		CONFIG_SYS_MAX_NAND_DEVICE
+#define CONFIG_HINFC301_REG_BASE_ADDRESS	NANDC_REG_BASE
+#define CONFIG_HINFC301_BUFFER_BASE_ADDRESS	NAND_MEM_BASE
+#define CONFIG_HINFC301_HARDWARE_PAGESIZE_ECC
+#define CONFIG_HINFC301_W_LATCH			(0xa)
+#define CONFIG_HINFC301_R_LATCH			(0xa)
+#define CONFIG_HINFC301_RW_LATCH		(0xa)
+
 /* no nor flash */
 #define CONFIG_SYS_NO_FLASH
 /* cp.b */
@@ -115,6 +135,7 @@
 #define CONFIG_ENV_IS_IN_SPI_FLASH	1
 
 #define CONFIG_ENV_OFFSET		0x40000 /* environment starts here */
+#define CONFIG_ENV_NAND_ADDR		(CONFIG_ENV_OFFSET)
 #define CONFIG_ENV_SPI_ADDR		(CONFIG_ENV_OFFSET)
 #define CONFIG_CMD_SAVEENV
 
@@ -181,8 +202,8 @@
 	#define HISFV_RMII_MODE			1
 	#define HIETH_MII_RMII_MODE_U		HISFV_MII_MODE
 	#define HIETH_MII_RMII_MODE_D		HISFV_MII_MODE
-	#define HISFV_PHY_U			1
-	#define HISFV_PHY_D			2 /* fix me */
+	#define HISFV_PHY_U			0			/* Change 2020.08.23 set 1 or 0, Dahua - 0 */
+	#define HISFV_PHY_D			1			/* Change 2020.08.23 set 2 or 1, Dahua - 1 */
 #endif /* CONFIG_NET_HISFV300 */
 
 /*-----------------------------------------------------------------------
