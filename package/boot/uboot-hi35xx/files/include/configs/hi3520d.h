@@ -107,6 +107,7 @@
 #define CONFIG_ENV_OFFSET          0x40000      /* environment starts here */
 #define CONFIG_ENV_SPI_ADDR        (CONFIG_ENV_OFFSET)
 #define CONFIG_CMD_SAVEENV
+#define CONFIG_CMD_RUN
 
 #define CONFIG_ENV_SIZE            0x10000    /*include ENV_HEADER_SIZE */
 #define CONFIG_ENV_SECT_SIZE CONFIG_ENV_SIZE

@@ -74,26 +74,6 @@
 
 #endif /* CONFIG_SPI_FLASH_HISFC350 */
 
-/*-----------------------------------------------------------------------
- * NAND Flash Configuration
- -----------------------------------------------------------------------*/
-#define CONFIG_SYS_64BIT_VSPRINTF
-#define CONFIG_CMD_NAND
-#define CONFIG_SYS_NAND_BASE NAND_MEM_BASE
-#define CONFIG_NAND_3518			1
-#define CFG_MAX_NAND_DEVICE			CONFIG_SYS_MAX_NAND_DEVICE
-#define CONFIG_SYS_MAX_NAND_DEVICE		1
-#define CONFIG_SYS_NAND_MAX_CHIPS		2
-#define CONFIG_ENV_IS_IN_NAND			1
-
-#define CONFIG_HINFC301_MAX_CHIP		CONFIG_SYS_MAX_NAND_DEVICE
-#define CONFIG_HINFC301_REG_BASE_ADDRESS	NANDC_REG_BASE
-#define CONFIG_HINFC301_BUFFER_BASE_ADDRESS	NAND_MEM_BASE
-#define CONFIG_HINFC301_HARDWARE_PAGESIZE_ECC
-#define CONFIG_HINFC301_W_LATCH			(0xa)
-#define CONFIG_HINFC301_R_LATCH			(0xa)
-#define CONFIG_HINFC301_RW_LATCH		(0xa)
-
 /* no nor flash */
 #define CONFIG_SYS_NO_FLASH
 /* cp.b */
@@ -135,7 +115,6 @@
 #define CONFIG_ENV_IS_IN_SPI_FLASH	1
 
 #define CONFIG_ENV_OFFSET		0x40000 /* environment starts here */
-#define CONFIG_ENV_NAND_ADDR		(CONFIG_ENV_OFFSET)
 #define CONFIG_ENV_SPI_ADDR		(CONFIG_ENV_OFFSET)
 #define CONFIG_CMD_SAVEENV
 #define CONFIG_CMD_RUN
@@ -162,6 +141,13 @@
 #define CONFIG_SENSOR		auto
 #define CONFIG_LINUX_CMD	version
 
+
+/* default location for tftp and bootm */
+#define CONFIG_LOADADDR		400000
+
+#define CONFIG_MAX_UBOOT_SIZE 0x40000
+
+// #define FS_STATISTICS 1
 /*-----------------------------------------------------------------------
  * for bootm linux
  -----------------------------------------------------------------------*/
@@ -189,9 +175,15 @@
 #define CONFIG_NET_RETRY_COUNT		50	/* FIXME */
 #define CONFIG_CMD_NET				/* do_ping common/cmd_net.c */
 
+#define CONFIG_CMD_HTTPD
+
 #define CONFIG_CMD_PING
 #define CONFIG_CMD_MII
+// #define CONFIG_MII
+// #define CONFIG_NET_MULTI			1
+// #define CONFIG_NETCONSOLE			1
 #define CONFIG_SYS_FAULT_ECHO_LINK_DOWN	1
+
 
 /*-----------------------------------------------------------------------
  * HIETH driver
@@ -204,8 +196,18 @@
 	#define HISFV_RMII_MODE			1
 	#define HIETH_MII_RMII_MODE_U		HISFV_MII_MODE
 	#define HIETH_MII_RMII_MODE_D		HISFV_MII_MODE
-	#define HISFV_PHY_U			0			/* Change 2020.08.23 set 1 or 0, Dahua - 0 */
-	#define HISFV_PHY_D			2			/* Change 2020.08.23 set 2 or 1, Dahua - 2 */
+	#define HISFV_PHY_U			0
+	#define HISFV_PHY_D			1 /* fix me */
+	#undef HISFV_RESET_GPIO_EN
+	#ifdef HISFV_RESET_GPIO_EN
+		/* use gpio5_0 to control sfv reset */
+		#define HISFV_RESET_GPIO_BASE	GPIO0_REG_BASE
+		#define HISFV_RESET_GPIO_DIR	0x400
+		#define HISFV_RESET_GPIO_BIT	5
+		#define HISFV_RESET_GPIO_DIR_OUT 1
+		/* 0-reset; 1-undo reset */
+		#define HISFV_RESET_GPIO_DATA	0
+	#endif /* HISFV_RESET_GPIO_EN */
 #endif /* CONFIG_NET_HISFV300 */
 
 /*-----------------------------------------------------------------------
@@ -224,7 +226,7 @@
 #define CFG_CMDLINE_HISTORYS		8
 #define CONFIG_CMDLINE_EDITING
 #define CFG_DDR_PHYS_OFFSET		MEM_BASE_DDR
-#define CFG_DDR_SIZE			(128 * 1024 * 1024UL)	/* 128M Bytes */
+#define CFG_DDR_SIZE			(128 * 1024 * 1024)	/* 128M Bytes */
 
 #define CONFIG_SYS_MEMTEST_START	(CFG_DDR_PHYS_OFFSET +\
 						sizeof(unsigned long))
@@ -291,5 +293,21 @@
  * SVB
  * ----------------------------------------------------------------------*/
 /* #define CONFIG_SVB_ENABLE */
+
+#define CFG_FLASH_BASE		0x9F000000
+
+/*
+ * ===========================
+ * HTTP recovery configuration
+ * ===========================
+ */
+#define WEBFAILSAFE_UPLOAD_KERNEL_ADDRESS	CFG_LOAD_ADDR
+
+#define WEBFAILSAFE_UPLOAD_ART_ADDRESS	(CFG_FLASH_BASE + 0x40000)
+
+
+/* Firmware size limit */
+#define WEBFAILSAFE_UPLOAD_LIMITED_AREA_IN_BYTES	(1856 * 1024)
+
 
 #endif	/* __CONFIG_H */
