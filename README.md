@@ -17,14 +17,14 @@ More [information about project](https://openipc.org)
 
 | Building status |    SoC    | U-Boot | Kernel | Rootfs | Maintainer |
 |-----------------|-----------|--------|--------|--------|------------|
-|![Hi3516Cv100 images](https://github.com/openipc/chaos_calmer/workflows/Hi3516Cv100%20images/badge.svg?branch=master)|Hi3516CV100|[uboot](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv100-u-boot.bin)|[kernel](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv100-default-uImage)|[rootfs](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv100-default-root.squashfs)|FlyRouter
-|![Hi3516Cv200 images](https://github.com/openipc/chaos_calmer/workflows/Hi3516Cv200%20images/badge.svg?branch=master)|Hi3516CV200|[uboot](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv200-u-boot.bin)|[kernel](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv200-default-uImage)|[rootfs](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv200-default-root.squashfs)|FlyRouter
-|![Hi3516Cv300 images](https://github.com/openipc/chaos_calmer/workflows/Hi3516Cv300%20images/badge.svg?branch=master)|Hi3516CV300|[uboot](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv300-u-boot.bin)|[kernel](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv300-default-uImage)|[rootfs](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv300-default-root.squashfs)|FlyRouter
-|![Hi3516Cv300 images](https://github.com/openipc/chaos_calmer/workflows/Hi3516Cv300%20images/badge.svg?branch=master)|Hi3516EV100|[uboot](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16ev100-u-boot.bin)|[kernel](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv300-default-uImage)|[rootfs](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv300-default-root.squashfs)|FlyRouter
-|![Hi3516Cv100 images](https://github.com/openipc/chaos_calmer/workflows/Hi3516Cv100%20images/badge.svg?branch=master)|Hi3518CV100|[uboot](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-18cv100-u-boot.bin)|[kernel](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv100-default-uImage)|[rootfs](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv100-default-root.squashfs)|FlyRouter
-|![Hi3516Cv100 images](https://github.com/openipc/chaos_calmer/workflows/Hi3516Cv100%20images/badge.svg?branch=master)|Hi3518EV100|[uboot](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-18ev100-u-boot.bin)|[kernel](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv100-default-uImage)|[rootfs](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv100-default-root.squashfs)|FlyRouter
-|![Hi3516Cv200 images](https://github.com/openipc/chaos_calmer/workflows/Hi3516Cv200%20images/badge.svg?branch=master)|Hi3518EV200|[uboot](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-18ev200-u-boot.bin)|[kernel](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv200-default-uImage)|[rootfs](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv200-default-root.squashfs)|FlyRouter
-|![Hi3516Cv200 images](https://github.com/openipc/chaos_calmer/workflows/Hi3516Cv200%20images/badge.svg?branch=master)|Hi3518EV201|[uboot](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-18ev201-u-boot.bin)|[kernel](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv200-default-uImage)|[rootfs](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv200-default-root.squashfs)|FlyRouter
+|![Hi3516Cv100 images](https://github.com/openipc/chaos_calmer/workflows/Hi3516Cv100%20images/badge.svg?branch=master)|Hi3516CV100|[uboot](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv100-u-boot.bin)|[kernel](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv100-default-uImage)|[rootfs](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv100-default-root.squashfs)|IZ+SS+DI
+|![Hi3516Cv200 images](https://github.com/openipc/chaos_calmer/workflows/Hi3516Cv200%20images/badge.svg?branch=master)|Hi3516CV200|[uboot](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv200-u-boot.bin)|[kernel](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv200-default-uImage)|[rootfs](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv200-default-root.squashfs)|IZ
+|![Hi3516Cv300 images](https://github.com/openipc/chaos_calmer/workflows/Hi3516Cv300%20images/badge.svg?branch=master)|Hi3516CV300|[uboot](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv300-u-boot.bin)|[kernel](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv300-default-uImage)|[rootfs](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv300-default-root.squashfs)|IZ+DI
+|![Hi3516Cv300 images](https://github.com/openipc/chaos_calmer/workflows/Hi3516Cv300%20images/badge.svg?branch=master)|Hi3516EV100|[uboot](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16ev100-u-boot.bin)|[kernel](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv300-default-uImage)|[rootfs](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv300-default-root.squashfs)|IZ+DI
+|![Hi3516Cv100 images](https://github.com/openipc/chaos_calmer/workflows/Hi3516Cv100%20images/badge.svg?branch=master)|Hi3518CV100|[uboot](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-18cv100-u-boot.bin)|[kernel](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv100-default-uImage)|[rootfs](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv100-default-root.squashfs)|IZ+SS+DI
+|![Hi3516Cv100 images](https://github.com/openipc/chaos_calmer/workflows/Hi3516Cv100%20images/badge.svg?branch=master)|Hi3518EV100|[uboot](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-18ev100-u-boot.bin)|[kernel](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv100-default-uImage)|[rootfs](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv100-default-root.squashfs)|IZ+SS+DI
+|![Hi3516Cv200 images](https://github.com/openipc/chaos_calmer/workflows/Hi3516Cv200%20images/badge.svg?branch=master)|Hi3518EV200|[uboot](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-18ev200-u-boot.bin)|[kernel](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv200-default-uImage)|[rootfs](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv200-default-root.squashfs)|IZ
+|![Hi3516Cv200 images](https://github.com/openipc/chaos_calmer/workflows/Hi3516Cv200%20images/badge.svg?branch=master)|Hi3518EV201|[uboot](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-18ev201-u-boot.bin)|[kernel](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv200-default-uImage)|[rootfs](https://github.com/OpenIPC/chaos_calmer/releases/download/latest/openwrt-hi35xx-16cv200-default-root.squashfs)|IZ
 
 ## How to flash to target hardware
 
@@ -79,14 +79,24 @@ Ready to flash images will be located at `bin/hi35xx/openwrt-hi35xx-*`
 ### Or use Docker for building
 
 ```Dockerfile
-FROM debian:jessie
+FROM debian:stretch
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get -y install \
-    build-essential gawk libncurses-dev intltool python \
-    git subversion time unzip zlib1g-dev libssl-dev wget curl cpio bc \
-    gettext gettext-base liblocale-gettext-perl
+RUN DEBIAN_FRONTEND=noninteractive apt-get update \
+    && apt-get --no-install-recommends -y install bc bison build-essential \
+    ca-certificates cmake cpio curl dos2unix file flex gawk gcc-multilib \
+    gettext gettext-base git intltool libc6-dev liblocale-gettext-perl \
+    libncurses-dev libssl-dev locales mc openssl python rsync subversion \
+    time tofrodos unzip upx wget zlib1g-dev \
+    && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias \
+    en_US.UTF-8 && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /src/chaos_calmer
+ENV LANG en_US.utf8
+
+WORKDIR /src/openipc
+
+RUN git clone --depth=1 https://github.com/OpenIPC/chaos_calmer.git /src/openipc
+RUN ./Project_OpenIPC.sh update
+RUN ./Project_OpenIPC.sh 18ev200_DEFAULT  # <= Change this ID to you profile
 ```
 
 ## Sponsor
