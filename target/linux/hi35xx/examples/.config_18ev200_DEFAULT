@@ -4220,7 +4220,7 @@ CONFIG_PACKAGE_hisi-osdrv2-sensor=y
 #
 # Multimedia
 #
-CONFIG_PACKAGE_minihttp=y
+CONFIG_PACKAGE_minihttp=m
 
 #
 # Other
