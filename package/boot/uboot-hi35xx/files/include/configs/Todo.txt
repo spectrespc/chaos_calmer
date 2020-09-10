@@ -5,7 +5,7 @@
 hi3516c.h            |
 hi3516cv200.h        |    ok           done
 hi3516cv300.h        |
-hi3516ev100.h        |
+hi3516ev100.h        |    ok           testing
 hi3518a.h            |
 hi3518c.h            |
 hi3518c_ussh.h       |
