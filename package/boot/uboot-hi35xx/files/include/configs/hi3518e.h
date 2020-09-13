@@ -128,9 +128,9 @@
 /*-----------------------------------------------------------------------
  *  Environment   Configuration
  ------------------------------------------------------------------------*/
-#define CONFIG_BOOTCOMMAND	"setenv bootargs $(bootargs) totalmem=$(totalmem) mem=$(osmem) ethaddr=$(ethaddr) phyaddru=$(phyaddru) phyaddrd=$(phyaddrd) sensor=$(sensor) linux_cmd=$(linux_cmd); sf probe 0; sf read 0x82000000 0x50000 0x200000; bootm 0x82000000"
+#define CONFIG_BOOTCOMMAND	"setenv setargs setenv bootargs ${bootargs}; run setargs; sf probe 0; sf read 0x82000000 0x50000 0x200000; bootm 0x82000000"
 #define CONFIG_BOOTDELAY	1
-#define CONFIG_BOOTARGS		"console=ttyAMA0,115200 panic=20 root=/dev/mtdblock3 rootfstype=squashfs,jffs2 mtdparts=hi_sfc:256k(boot),64k(env),2048k(kernel),5120k(rootfs),-(rootfs_data)"
+#define CONFIG_BOOTARGS		"totalmem=$(totalmem) mem=$(osmem) ethaddr=$(ethaddr) phyaddru=$(phyaddru) phyaddrd=$(phyaddrd) sensor=$(sensor) linux_cmd=$(linux_cmd) console=ttyAMA0,115200 panic=20 root=/dev/mtdblock3 rootfstype=squashfs mtdparts=hi_sfc:256k(boot),64k(env),2048k(kernel),5120k(rootfs),-(rootfs_data)"
 #define CONFIG_NETMASK		255.255.255.0		/* talk on MY local net */
 #define CONFIG_IPADDR		192.168.1.10		/* default static IP */
 #define CONFIG_SERVERIP		192.168.1.254		/* default tftp server ip */
@@ -174,16 +174,26 @@
 
 /*-----------------------------------------------------------------------
  * HIETH driver
+ #
+ # Set CONFIG_HIETH_MII_RMII_MODE_U=1   - XM+Camhi+Blue vendor
+ # Set CONFIG_HIETH_MII_RMII_MODE_D=1   - XM+Camhi+Blue vendor
+ #
+ # Set CONFIG_HIETH_PHYID_U=1           - XM vendor
+ # Set CONFIG_HIETH_PHYID_D=2           - XM vendor
+ #
+ # Set CONFIG_HIETH_PHYID_U=0           - Camhi/Blue vendor
+ # Set CONFIG_HIETH_PHYID_D=1           - Camhi/Blue vendor
+ #
  -----------------------------------------------------------------------*/
 /* default is hieth-switch-fabric */
 #define CONFIG_NET_HISFV300
 #ifdef CONFIG_NET_HISFV300
 	#define HISFV_MII_MODE			0
 	#define HISFV_RMII_MODE			1
-	#define HIETH_MII_RMII_MODE_U		HISFV_MII_MODE
-	#define HIETH_MII_RMII_MODE_D		HISFV_MII_MODE
-	#define HISFV_PHY_U			1
-	#define HISFV_PHY_D			2 /* fix me */
+	#define HIETH_MII_RMII_MODE_U		HISFV_RMII_MODE
+	#define HIETH_MII_RMII_MODE_D		HISFV_RMII_MODE
+	#define HISFV_PHY_U			0
+	#define HISFV_PHY_D			1 /* fix me */
 #endif /* CONFIG_NET_HISFV300 */
 
 /*-----------------------------------------------------------------------

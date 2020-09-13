@@ -1,0 +1,17 @@
+
+
+                          ethernet     boot_args
+                          --------     ---------
+hi3516c.h            |    testing      done
+hi3516cv200.h        |    ok           done
+hi3516cv300.h        |    ok           done
+hi3516ev100.h        |    ok           done
+hi3518a.h            |                 done
+hi3518c.h            |                 done
+hi3518e.h            |    testing      done
+hi3518ev200.h        |    ok           done
+hi3518ev201.h        |                 done
+hi3520d.h            |                 done
+                     |
+hi3518c_ussh.h       |                 done
+hi3518ev200_rotek.h  |                 done
