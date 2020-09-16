@@ -1,0 +1,93 @@
+name: Hi3516Cv300 images
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - "v*"
+
+jobs:
+  image_build:
+    name: images build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Install build dependencies
+        run: |
+          DEBIAN_FRONTEND=noninteractive sudo apt-get update && sudo apt-get -y install \
+          build-essential gawk libncurses-dev intltool python \
+          git subversion time unzip zlib1g-dev libssl-dev wget curl cpio bc \
+          gettext gettext-base liblocale-gettext-perl
+
+      - name: Free disk space
+        run: |
+          sudo swapoff -a
+          sudo rm -f /swapfile
+          sudo apt clean
+          docker rmi $(docker image ls -aq)
+          df -h
+
+      - name: Hi3516Cv300 images build
+        run: |
+          HEAD_TAG=$(git tag --points-at HEAD)
+          BRANCH_NAME=$(echo $GITHUB_REF | cut -d'/' -f 3)
+          if [ -z "$HEAD_TAG" ]; then
+            TAG_NAME="latest"
+            RELEASE_NAME="Development Build"
+            PRERELEASE=true
+          else
+            TAG_NAME=${{ github.ref }}
+            RELEASE_NAME="Release ${{ github.ref }}"
+            PRERELEASE=false
+          fi
+          ARCHIVE="output/openwrt-hi35xx-*"
+          echo ::set-env name=ARCHIVE::$ARCHIVE
+          echo ::set-env name=TAG_NAME::$TAG_NAME
+          echo ::set-env name=RELEASE_NAME::$RELEASE_NAME
+          echo ::set-env name=PRERELEASE::$PRERELEASE
+
+          ./Project_OpenIPC.sh update
+          ./Project_OpenIPC.sh 16cv300_DEFAULT
+          sed -i 's/CONFIG_TARGET_hi35xx_16cv300=y/# CONFIG_TARGET_hi35xx_16cv300 is not set/g' .config
+          sed -i 's/# CONFIG_TARGET_hi35xx_16ev100 is not set/CONFIG_TARGET_hi35xx_16ev100=y/' .config
+          sed -i 's/CONFIG_PACKAGE_uboot-hi35xx-16cv300=y/CONFIG_PACKAGE_uboot-hi35xx-16ev100=y/' .config
+          make -j$(nproc) package/boot/uboot-hi35xx/{clean,compile,install}
+          cp bin/hi35xx/openwrt-hi35xx-16cv300-default-root.squashfs openwrt-hi35xx-16ev100-default-root.squashfs
+          cp bin/hi35xx/openwrt-hi35xx-16cv300-default-uImage openwrt-hi35xx-16ev100-default-uImage
+
+          mkdir output
+          mv bin/hi35xx/openwrt-hi35xx-16cv300-u-boot.bin output
+          mv bin/hi35xx/openwrt-hi35xx-16cv300-default-root.squashfs output
+          mv bin/hi35xx/openwrt-hi35xx-16cv300-default-uImage output
+          mv bin/hi35xx/openwrt-hi35xx-16ev100-u-boot.bin output
+          mv bin/hi35xx/openwrt-hi35xx-16ev100-default-root.squashfs output
+          mv bin/hi35xx/openwrt-hi35xx-16ev100-default-uImage output
+
+      - name: Post free disk space
+        run: |
+          df -h
+
+      - name: Create release
+        uses: actions/create-release@v1
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.TAG_NAME }}
+          release_name: ${{ env.RELEASE_NAME }}
+          draft: false
+          prerelease: ${{ env.PRERELEASE }}
+
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file_glob: true
+          file: ${{ env.ARCHIVE }}
+          asset_name: ${{ env.ARCHIVE }}
+          tag: ${{ env.TAG_NAME }}
+          overwrite: true
