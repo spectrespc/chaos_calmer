@@ -64,8 +64,8 @@ jobs:
           mv bin/hi35xx/openwrt-hi35xx-16cv300-default-root.squashfs output
           mv bin/hi35xx/openwrt-hi35xx-16cv300-default-uImage output
           mv bin/hi35xx/openwrt-hi35xx-16ev100-u-boot.bin output
-          mv bin/hi35xx/openwrt-hi35xx-16ev100-default-root.squashfs output
-          mv bin/hi35xx/openwrt-hi35xx-16ev100-default-uImage output
+          mv openwrt-hi35xx-16ev100-default-root.squashfs output
+          mv openwrt-hi35xx-16ev100-default-uImage output
 
       - name: Post free disk space
         run: |
