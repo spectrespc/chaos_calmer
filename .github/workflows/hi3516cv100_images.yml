@@ -44,7 +44,7 @@ jobs:
             RELEASE_NAME="Release ${{ github.ref }}"
             PRERELEASE=false
           fi
-          ARCHIVE="bin/hi35xx/openwrt-hi35xx-16cv100-*"
+          ARCHIVE="output/openwrt-hi35xx-*"
           echo ::set-env name=ARCHIVE::$ARCHIVE
           echo ::set-env name=TAG_NAME::$TAG_NAME
           echo ::set-env name=RELEASE_NAME::$RELEASE_NAME
@@ -52,6 +52,11 @@ jobs:
 
           ./Project_OpenIPC.sh update
           ./Project_OpenIPC.sh 16cv100_DEFAULT
+
+          mkdir output
+          mv bin/hi35xx/openwrt-hi35xx-16cv100-u-boot.bin output
+          mv bin/hi35xx/openwrt-hi35xx-16cv100-default-root.squashfs output
+          mv bin/hi35xx/openwrt-hi35xx-16cv100-default-uImage output
 
       - name: Post free disk space
         run: |
