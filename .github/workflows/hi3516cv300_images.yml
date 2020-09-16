@@ -56,16 +56,16 @@ jobs:
           sed -i 's/# CONFIG_TARGET_hi35xx_16ev100 is not set/CONFIG_TARGET_hi35xx_16ev100=y/' .config
           sed -i 's/CONFIG_PACKAGE_uboot-hi35xx-16cv300=y/CONFIG_PACKAGE_uboot-hi35xx-16ev100=y/' .config
           make -j$(nproc) package/boot/uboot-hi35xx/{clean,compile,install}
-          cp bin/hi35xx/openwrt-hi35xx-16cv300-default-root.squashfs openwrt-hi35xx-16ev100-default-root.squashfs
-          cp bin/hi35xx/openwrt-hi35xx-16cv300-default-uImage openwrt-hi35xx-16ev100-default-uImage
+          cp bin/hi35xx/openwrt-hi35xx-16cv300-default-root.squashfs bin/hi35xx/openwrt-hi35xx-16ev100-default-root.squashfs
+          cp bin/hi35xx/openwrt-hi35xx-16cv300-default-uImage bin/hi35xx/openwrt-hi35xx-16ev100-default-uImage
 
           mkdir output
           mv bin/hi35xx/openwrt-hi35xx-16cv300-u-boot.bin output
           mv bin/hi35xx/openwrt-hi35xx-16cv300-default-root.squashfs output
           mv bin/hi35xx/openwrt-hi35xx-16cv300-default-uImage output
           mv bin/hi35xx/openwrt-hi35xx-16ev100-u-boot.bin output
-          mv openwrt-hi35xx-16ev100-default-root.squashfs output
-          mv openwrt-hi35xx-16ev100-default-uImage output
+          mv bin/hi35xx/openwrt-hi35xx-16ev100-default-root.squashfs output
+          mv bin/hi35xx/openwrt-hi35xx-16ev100-default-uImage output
 
       - name: Post free disk space
         run: |
