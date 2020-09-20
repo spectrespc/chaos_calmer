@@ -1,0 +1,17 @@
+
+
+                        ethernet     boot_args     software
+                        --------     ---------     ------------------------------
+Hi3516cv100        |    testing      done          gdbserver, strace
+Hi3516cv200        |    ok           done
+Hi3516cv300        |    ok           done          gdbserver, strace
+Hi3516ev100        |    ok           done          gdbserver, strace
+Hi3518Av100        |                 done
+Hi3518Cv100        |                 done
+Hi3518Ev100        |    testing      done
+Hi3518Ev200        |    ok           done
+Hi3518Ev201        |                 done
+Hi3520Dv100        |                 done
+                   |
+Hi3518Cv100_ussh   |                 done
+Hi3518Ev200_rotek  |                 done
