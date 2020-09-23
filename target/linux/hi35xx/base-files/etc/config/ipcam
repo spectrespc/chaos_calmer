@@ -22,3 +22,9 @@ config ipcam 'gpio'
 
 config ipcam 'i2c'
 	option status	'-'
+
+config service 'sdcard'
+	option enabled '1'
+	option photo '1'
+	option video '1'
+	option overwrite '1'

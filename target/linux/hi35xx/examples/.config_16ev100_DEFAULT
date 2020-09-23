@@ -4245,6 +4245,7 @@ CONFIG_PACKAGE_hisi-osdrv3-lib=y
 #
 CONFIG_PACKAGE_demo=y
 CONFIG_PACKAGE_kdb=m
+CONFIG_PACKAGE_luci-app-ipcam=y
 
 #
 # Sensors
