@@ -38,6 +38,7 @@ prefer)
 
 ```
 sf probe 0 ; sf lock 0
+mw.b 0x82000000 ff 0x50000
 tftp 0x82000000 openwrt-hi35xx-16cv300-u-boot.bin
 sf erase 0x0 0x50000
 sf write ${fileaddr} 0x0 ${filesize}
@@ -48,6 +49,7 @@ reset
 
 ```
 sf probe 0 ; sf lock 0
+mw.b 0x82000000 ff 0x200000
 tftp 0x82000000 openwrt-hi35xx-16cv300-default-uImage
 sf erase 0x50000 0x200000
 sf write ${fileaddr} 0x50000 ${filesize}
@@ -57,6 +59,7 @@ sf write ${fileaddr} 0x50000 ${filesize}
 
 ```
 sf probe 0 ; sf lock 0
+mw.b 0x82000000 ff 0x500000
 tftp 0x82000000 openwrt-hi35xx-16cv300-default-root.squashfs
 sf erase 0x250000 0x500000
 sf write ${fileaddr} 0x250000 ${filesize}
