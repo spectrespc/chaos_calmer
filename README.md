@@ -2,7 +2,7 @@
 
 Alternative firmware for IP cameras and NVRs based on the HiSilicon SoCs
 
-More [information about project](https://openipc.org)
+More information about project -[here](https://openipc.org) and [here](http://alpha.openipc.org/firmware)
 
 [![CI status](https://img.shields.io/github/v/release/OpenIPC/chaos_calmer.svg)](https://github.com/OpenIPC/chaos_calmer/releases)
 [![CI status](https://img.shields.io/github/downloads/OpenIPC/chaos_calmer/total.svg)](https://github.com/OpenIPC/chaos_calmer/releases)
