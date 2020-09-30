@@ -4326,7 +4326,7 @@ CONFIG_PACKAGE_luci-app-ipcam=y
 # Tools
 #
 CONFIG_PACKAGE_flash_tool=m
-CONFIG_PACKAGE_hi_chip_info=y
+CONFIG_PACKAGE_hi_chip_info=m
 
 #
 # Unused
