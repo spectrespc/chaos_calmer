@@ -10,10 +10,9 @@ config interface loopback
 
 config interface lan
 	option ifname	'eth0'
-	option proto	'static'
-	option ipaddr	'192.168.1.10'
-	option netmask	'255.255.255.0'
-	option gateway	'192.168.1.1'
-	option dns	'77.88.8.8 8.8.4.4'
+	option proto	'dhcp'
 
+config interface 'wifi'
+        option ifname	'wlan0'
+        option proto	'dhcp'
 
