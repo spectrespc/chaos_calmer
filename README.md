@@ -72,7 +72,7 @@ sf write ${fileaddr} 0x250000 ${filesize}
 Usage example for Debian (8 or 9)/Ubuntu
 
 ```
-git clone --depth=1 https://github.com/OpenIPC/chaos_calmer.git OpenIPC
+git clone --depth=1 https://github.com/spectrespc/chaos_calmer.git OpenIPC
 cd OpenIPC
 ./Project_OpenIPC.sh update
 ./Project_OpenIPC.sh 18ev200_zftlab_rotek
@@ -98,7 +98,7 @@ ENV LANG en_US.utf8
 
 WORKDIR /src/openipc
 
-RUN git clone --depth=1 https://github.com/OpenIPC/chaos_calmer.git /src/openipc
+RUN git clone --depth=1 https://github.com/spectrespc/chaos_calmer.git /src/openipc
 RUN ./Project_OpenIPC.sh update
 RUN ./Project_OpenIPC.sh 18ev200_DEFAULT  # <= Change this ID to you profile
 ```
