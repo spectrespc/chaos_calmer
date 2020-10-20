@@ -25,6 +25,6 @@ endef
 include $(INCLUDE_DIR)/target.mk
 
 DEFAULT_PACKAGES += \
-        opkg bridge flash_tool i2c-tools kmod-tun busybox dropbear -ip6tables -odhcp6c -kmod-ipv6 -kmod-ip6tables -odhcpd-ipv6only -ppp -ppp-mod-pppoe -iptables
+        opkg bridge flash_tool i2c-tools kmod-tun busybox dropbear kmod-fs-nfs -ip6tables -odhcp6c -kmod-ipv6 -kmod-ip6tables -odhcpd-ipv6only -ppp -ppp-mod-pppoe -iptables
 
 $(eval $(call BuildTarget))
