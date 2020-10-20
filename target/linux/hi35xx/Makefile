@@ -12,8 +12,6 @@ BOARDNAME:=Hisilicon HI35xx devices
 SUBTARGETS:=15av100 15cv100 16av200 16cv100 16cv200 16cv300 16ev100 18av100 18cv100 18ev100 18ev200 18ev201 20dv100 20dv200
 
 FEATURES:=squashfs rtc usb gpio
-DEFAULT_PACKAGES := \
-		kmod-tun
 
 MAINTAINER:=Igor Zalatov (ZFT Lab.) <flyrouter@gmail.com>
 KERNEL_PATCHVER:=3.18.20
@@ -25,5 +23,8 @@ define Target/Description
 endef
 
 include $(INCLUDE_DIR)/target.mk
+
+DEFAULT_PACKAGES += \
+        opkg bridge flash_tool i2c-tools kmod-tun busybox dropbear -ip6tables -odhcp6c -kmod-ipv6 -kmod-ip6tables -odhcpd-ipv6only -ppp -ppp-mod-pppoe -iptables
 
 $(eval $(call BuildTarget))
