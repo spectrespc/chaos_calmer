@@ -1,0 +1,135 @@
+#!/bin/sh /etc/rc.common
+
+START=45
+STOP=45
+
+readconfig() {
+ssid=`cat /mnt/mmc/config.txt | grep ssid | sed '/^#/d' | sed 's/ \{1,\}/ /g' | cut -d: -d " " -f 2`
+curssid=`uci get wireless.@wifi-iface[0].ssid`
+key=`cat /mnt/mmc/config.txt | grep key | sed '/^#/d' | sed 's/ \{1,\}/ /g' | cut -d: -d " " -f 2`
+curkey=`uci get wireless.@wifi-iface[0].key`
+ipaddr=`cat /mnt/mmc/config.txt | grep ipaddr | sed '/^#/d' | sed 's/ \{1,\}/ /g' | cut -d: -d " " -f 2`
+curipaddr=`uci get network.wifi.ipaddr`
+netmask=`cat /mnt/mmc/config.txt | grep netmask | sed '/^#/d' | sed 's/ \{1,\}/ /g' | cut -d: -d " " -f 2`
+curnetmask=`uci get network.wifi.netmask`
+gateway=`cat /mnt/mmc/config.txt | grep gateway | sed '/^#/d' | sed 's/ \{1,\}/ /g' | cut -d: -d " " -f 2`
+curgateway=`uci get network.wifi.gateway`
+dns=`cat /mnt/mmc/config.txt | grep dns | sed '/^#/d' | sed 's/ \{1,\}/ /g' | cut -d: -d " " -f 2`
+curdns=`uci get network.wifi.dns`
+hostname=`cat /mnt/mmc/config.txt | grep hostname | sed '/^#/d' | sed 's/ \{1,\}/ /g' | cut -d: -d " " -f 2`
+curhostname=`uci get system.@system[0].hostname`
+timezone=`cat /mnt/mmc/config.txt | grep timezone | sed '/^#/d' | sed 's/ \{1,\}/ /g' | cut -d: -d " " -f 2`
+curtimezone=`uci get system.@system[0].timezone`
+ntpserver=`cat /mnt/mmc/config.txt | grep ntpserver | sed '/^#/d' | sed 's/ \{1,\}/ /g' | cut -d: -d " " -f 2`
+curntpserver=`uci get system.ntp.server`
+dumpconfig=`echo -n "$ssid$key$ipaddr$netmask$gateway$dns"`
+dumpcurconfig=`echo -n "$curssid$curkey$curipaddr$curnetmask$curgateway$curdns"`
+}
+
+setconfig() {
+echo "set wifi config"
+#wifi down > /dev/null 2>&1
+ [[ ! -z "$ssid" && ! -z "$key" ]] && \
+ uci set wireless.@wifi-iface[0].encryption=psk2 > /dev/null 2>&1 || \
+ ( [[ ! -z "$ssid" ]] && uci set wireless.@wifi-iface[0].encryption=open );
+ [[ "$curssid" == "$ssid" ]] || ( [[ ! -z "$ssid" ]] && uci set wireless.@wifi-iface[0].ssid=$ssid )
+ [[ "$curkey" == "$key" ]] || ( [[ ! -z "$key" ]] && uci set wireless.@wifi-iface[0].key=$key )
+ echo "set ip addr"
+ if [ ! -z "$ipaddr" ]
+ then
+     if [ "$ipaddr" = "dhcp" ]
+     then
+       echo "set dhcp"
+       [[ "`uci get network.wifi.proto`" == "dhcp" ]] || uci set network.wifi.proto='dhcp' > /dev/null 2>&1
+     else
+       echo "set static"
+       uci set network.wifi.proto='static' > /dev/null 2>&1
+       [[ "$curipaddr" == "$ipaddr" ]] || ( [[ ! -z "$ipaddr" ]] && \
+       uci set network.wifi.ipaddr=$ipaddr ) > /dev/null 2>&1
+       [[ "$curnetmask" == "$netmask" ]] || ( [[ ! -z "$netmask" ]] && \
+       uci set network.wifi.netmask=$netmask ) > /dev/null 2>&1
+       [[ "$curgateway" == "$gateway" ]] || ( [[ ! -z "$gateway" ]] && \
+       uci set network.wifi.gateway=$gateway ) > /dev/null 2>&1
+       [[ "$curdns" == "$dns" ]] || ( [[ ! -z "$dns" ]] && \
+       uci set network.wifi.dns=$dns ) > /dev/null 2>&1
+     fi
+ fi
+ [[ "$curhostname" == "$hostname" ]] || ( [[ ! -z "$hostname" ]] \
+ && uci set system.@system[0].hostname=$hostname ) > /dev/null 2>&1
+ [[ "$curtimezone" == "$timezone" ]] || ( [[ ! -z "$timezone" ]] \
+ && uci set system.@system[0].timezone=$timezone ) > /dev/null 2>&1
+ [[ "$curntpserver" == "$ntpserver" ]] || ( [[ ! -z "$ntpserver" ]] \
+ && uci set system.ntp.server=$ntpserver ) > /dev/null 2>&1
+ echo "commit"
+ uci commit
+ #sleep 3
+ #wifi up
+ /etc/init.d/network restart
+}
+
+checkconfig() {
+
+if [ -f /mnt/mmc/getsrc ]
+then
+ cp /etc/config/wireless /mnt/mmc/wireless.src
+ rm -f /mnt/mmc/getsrc
+fi
+
+if [ -f /mnt/mmc/config.txt ]
+then
+ readconfig
+ [[ "`echo $dumpcurconfig`" == "`echo $dumpconfig`" ]] && echo "config current" \
+ || ( [[  ! -z "$dumpconfig" ]] && setconfig )
+else
+  cat << "EOF" > /mnt/mmc/config.txt
+# remove # end <>
+#ssid: <set ssid id>
+#key: <set key password, passphrase length 8...63>
+#ipaddr: <set ip address or place dhcp>
+#netmask: <set netmask, no need if dhcp>
+#gateway: <set gateway address, no need if dhcp, or no nide if not use>
+#dns: <set dns, no need if dhcp send it, or no need if not use>
+#hostname: <set it>
+#timezone: <set it, https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
+#ntpserver: <set it, default use gateway>
+EOF
+fi
+
+if [ -f /mnt/mmc/wireless.set ]
+then
+ wifi down
+ rm -f /etc/config/wireless
+ cp /mnt/mmc/wireless.set /etc/config/wireless
+ rm -f /mnt/mmc/wireless.set
+ wifi up
+fi
+
+if [ -f /mnt/mmc/reset ]
+then
+ wifi down
+ rm -f /etc/config/wireless
+ wifi detect > /etc/config/wireless
+ rm -f /mnt/mmc/reset
+ cp /etc/config/wireless /mnt/mmc/wireless.src
+ wifi up
+fi
+
+if [ -f /mnt/mmc/hardres ]
+then
+ rm -f /mnt/mmc/hardres
+ flash_eraseall -j /dev/mtd4
+fi
+}
+
+start() {
+        echo "read config on SDcard"
+	[[ -z "`mount | grep mmc`" ]] || fsck.fat -a -v /dev/mmcblk0 > /dev/null 2>&1
+        [[ -z "`mount | grep mmc`" ]] || checkconfig
+        echo "set config done"
+        # commands to launch application
+}
+
+stop() {
+        echo stop
+        # commands to kill application
+}

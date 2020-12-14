@@ -1,0 +1,21 @@
+#!/bin/sh /etc/rc.common
+
+START=19
+STOP=19
+
+start() {
+	echo "63" > /sys/class/gpio/export;
+	echo "out" > /sys/class/gpio/gpio63/direction;
+	echo "0" > /sys/class/gpio/gpio63/value;
+        # commands to launch application
+	sleep 1
+	if [ ! -f /etc/config/wireless ]
+	then
+        wifi detect > /etc/config/wireless
+	fi
+}
+
+stop() {
+        echo stop
+        # commands to kill application
+}
