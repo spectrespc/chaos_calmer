@@ -159,7 +159,7 @@ enable_wext() {
 
 detect_wext() {
 	cd /sys/class/net
-	for dev in $(ls -d wlan* 2>&- || ls -d ra* 2>&-); do
+	for dev in $(ls -d wlan* 2>&- && ls -d ra* 2>&-); do
 		config_get type "$dev" type
 		[ "$type" = wext ] && return
 		cat <<EOF
