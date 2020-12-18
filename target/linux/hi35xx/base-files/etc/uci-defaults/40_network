@@ -1,0 +1,34 @@
+#!/bin/sh
+#
+# Copyright (C) 2014 OpenWrt.org
+#
+
+[ -e /etc/config/network ] && rm -r /etc/config/network
+
+touch /etc/config/network
+
+. /lib/functions/uci-defaults.sh
+. /lib/hi35xx.sh
+
+ucidef_set_interface_loopback
+
+board=$(hi35xx_board_name)
+
+ucidef_set_interface_raw "lan" "eth0" "dhcp"
+
+ucidef_set_interface_raw "wifi" "`cd /sys/class/net/ && ( ls -d ra0 || ls -d wlan0 )`" "dhcp"
+
+case "$board" in
+*)
+	local mac
+	mac=$(fw_printenv -n ethaddr)
+	[ -n "$mac" ] && ucidef_set_interface_macaddr "lan" "$mac"
+	echo "Device $board found - 02_network" | logger
+	;;
+esac
+
+
+
+uci commit network
+
+exit 0
